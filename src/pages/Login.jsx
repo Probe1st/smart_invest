@@ -1,9 +1,9 @@
-import { createElement, useContext } from "react";
+import { useContext } from "react";
 import InputForm from "../components/InputForm";
 import Link from "../components/LinkButton";
 import SubmitButton from "../components/SubmitButton";
 import { Context } from "..";
-import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithRedirect, signOut } from "firebase/auth";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 export default function Login() {
   const { auth } = useContext(Context);
