@@ -2,10 +2,100 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  @apply font-[Montserrat]; 
+}
+
 #root {
-    @apply flex flex-col sm:w-full 2xl:max-w-[1800px] items-center min-h-screen;
+  @apply flex flex-col sm:w-full 2xl:max-w-[1800px] items-center min-h-screen text-white;
 }
 
 body {
-    @apply flex flex-col items-center bg-slate-900 text-gray-300 text-lg;
+  @apply flex flex-col items-center text-lg;
+}
+
+/* ------------------------------------------------------------------------- */
+
+.swiper-slide {
+  @apply flex flex-row items-center justify-center text-center py-20 h-auto;
+}
+
+.mySwiper {
+  @apply w-full m-0 h-[40rem];
+}
+
+.swiper-pagination :nth-child(n) {
+  @apply bg-white w-5 h-5;
+}
+
+.simple-card {
+  @apply flex flex-col justify-center w-9/12 space-y-8  z-10;
+}
+
+.simple-card h2 {
+  @apply text-3xl font-bold;
+}
+
+/* ------------------------------------------------------------------------- */
+
+.way {
+  @apply flex flex-row justify-evenly w-2/3 mx-auto text-black;
+}
+
+.way > :nth-child(1) {
+  @apply relative right-[6rem] 2xl:right-0 top-[7em]
+}
+
+.way > :nth-child(2) {
+  @apply relative right-[3rem] 2xl:right-0
+}
+
+.way > :nth-child(3) {
+  @apply relative top-[8rem] right-[1rem]
+}
+
+.way > :nth-child(4) {
+  @apply relative 2xl:left-[1em] left-[4rem]
+}
+
+.way > :nth-child(5) {
+  @apply relative top-[7em] 2xl:left-[1em] left-[6rem]
+}
+
+/* ------------------------------------------------------------------------- */
+
+.child-centerd {
+  @apply flex flex-col items-center;
+}
+
+/* ------------------------------------------------------------------------- */
+
+.calculator {
+  @apply w-2/3 mt-32 border-2 border-blue-900 rounded-3xl py-11 px-14 space-y-10
+}
+
+.calculator .button {
+  @apply border-2 rounded-full text-black text-center font-semibold py-4 px-20 w-full h-fit cursor-pointer;
+}
+
+.calculator .button:not([data-active-plane]) {
+  @apply border-blue-900;
+}
+
+[data-active-plane] {
+  border: solid 2px rgb(37 99 235);
+}
+
+/* ------------------------------------------------------------------------- */
+
+.robots-swiper .swiper-slide-prev, .robots-swiper .swiper-slide-next{
+  @apply bg-blue-400 rounded-3xl brightness-75
+}
+
+.robots-swiper .swiper-slide-active {
+  @apply bg-blue-800 rounded-3xl
+}
+
+.robots-swiper .swiper-slide {
+  @apply flex flex-col space-y-5 px-6 py-8
 }

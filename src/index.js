@@ -19,7 +19,7 @@ const app = initializeApp({
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-export const Context = createContext({auth, db})
+export const Context = createContext({auth, db, app})
 
 onAuthStateChanged(auth, (user) => {
   if(user) {

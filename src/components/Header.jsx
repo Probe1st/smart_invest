@@ -1,57 +1,51 @@
-import { useCallback, useContext, useEffect, useRef } from "react";
+import { useContext } from "react";
 import LinkButton from "./LinkButton";
 import { Context } from "..";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { getDownloadURL, getStorage, ref } from "firebase/storage";
 
 export default function Header() {
-  // <LinkButton className="text-gray-300 text-lg font-semibold hover:underline" text="Профиль" link="profile" />
-  let { auth } = useContext(Context);
+  let { app } = useContext(Context);
 
-  let text = useRef(null);
-  let link = useRef(null);
-
-  useEffect(() => {
-    isLogin(auth, link, text)
-  }, [useAuthState(auth)[0]]);
-
-  isLogin(auth, link, text)
-
-
+  getDownloadURL(ref(getStorage(app), "svg/logo.svg")).then((url) => {
+    const img = document.querySelectorAll("[alt='logo']");
+    img.forEach(e => e.setAttribute("src", url))
+  });
 
   return (
     <header className="flex flex-row items-center w-2/3 py-5 justify-between">
-      <div>
-        <LinkButton
-          link="/"
-          className="text-sky-400 text-xl"
-          text="Smart Invest"
-        />
+      <div className="flex flex-row items-center space-x-4">
+        <img className="w-12" alt="logo" />
+
+        <div className="space-x-2">
+          <LinkButton
+            link={"/"}
+            className="font-bold text-xl text-black"
+            text={"SMART"}
+          />
+          <LinkButton
+            link={"/"}
+            className={"font-bold text-xl text-blue-800"}
+            text={"INVEST"}
+          />
+        </div>
       </div>
 
-      <div className="flex flex-row space-x-5 items-center">
-        <span
-          style={{ cursor: "pointer" }}
-          className={`text-gray-300 text-lg font-semibold hover:underline`}
-          onClick={() => (window.location.href = link.current)}
-        >
-          {text.current}
-        </span>
-        {/* <div className="flex flex-col space-y-2 w-fit h-fit">
-          <div className="rounded-full bg-gray-500 w-8 h-1"></div>
-          <div className="rounded-full bg-gray-500 w-8 h-1"></div>
-          <div className="rounded-full bg-gray-500 w-8 h-1"></div>
-        </div> */}
+      <div className="flex flex-row space-x-5">
+        <LinkButton
+          link={"registration"}
+          text={"Регистрация"}
+          className={
+            "flex font-bold rounded-full bg-gradient-to-t from-[#193a9f] to-[#2952cd] py-3 px-5 min-w-[8.4rem]"
+          }
+        />
+        <LinkButton
+          link={"login"}
+          text={"Вход"}
+          className={
+            "flex font-bold rounded-full border border-black justify-center py-3 px-5 min-w-[8.4rem] text-black"
+          }
+        />
       </div>
     </header>
   );
-}
-
-function isLogin(auth, link, text) {
-  if (auth.currentUser) {
-    text.current = "Профиль";
-    link.current = "/profile";
-  } else {
-    text.current = "Войти";
-    link.current = "login";
-  }
 }

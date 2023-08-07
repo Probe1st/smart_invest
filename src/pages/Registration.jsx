@@ -1,12 +1,9 @@
 import InputForm from "../components/InputForm";
 import SubmitButton from "../components/SubmitButton";
 import Link from "../components/LinkButton";
-import { useContext, useRef } from "react";
+import { useContext } from "react";
 import { Context } from "..";
-import {
-  createUserWithEmailAndPassword,
-  fetchSignInMethodsForEmail,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import RegisterFormData from "../constructors/registerFormData";
 
@@ -19,27 +16,30 @@ export default function Register() {
 
     let data = new Array(...form.querySelectorAll("input")).map((e) => e.value);
     data = new RegisterFormData(...data);
+    let { surname, name, patronymic, email, pass } = data;
 
     let notice = form.querySelector("#notice");
 
-    if(notice.innerHTML) {
-      notice.setAttribute("hidden", "");
-      notice.innerHTML = "";
-    }
-
     if (!validatePass(data)) {
       notice.removeAttribute("hidden");
-      notice.innerHTML = "Пароли не совпадают";
+      notice.innerHTML = "пароли не совпадают";
       return;
     }
 
-    if(await validateEmail(auth, data.email) !== []) {
+    createUserWithEmailAndPassword(auth, email, pass).catch((e) => {
       notice.removeAttribute("hidden");
-      notice.innerHTML = "Электронная почта уже используется";
-      return;
-    }
+      notice.innerHTML = e.message;
+    });
 
-    console.log("end submit")
+    setDoc(doc(db, `/users/${email}`), {
+      surname: surname,
+      name,
+      patronymic,
+      email,
+    }).catch((e) => {
+      notice.removeAttribute("hidden");
+      notice.innerHTML = e.code;
+    });
   };
 
   return (
@@ -111,32 +111,3 @@ function validatePass(data) {
   if (pass === repPass) return true;
   return false;
 }
-
-async function validateEmail(auth, email) {
-  let valid = await fetchSignInMethodsForEmail(auth, email);
-
-  console.log(valid[0])
-  if (valid[0]) return false;
-  return true;
-}
-
-// function handleSubmit(e, auth, db) {
-//   e.preventDefault();
-
-//   let form = e.currentTarget;
-//   let inputs = Array(...form.querySelectorAll("input"));
-//   let data = inputs.map(e => {
-//     return e.value;
-//   });
-
-//   signUp(data, auth, db)
-// }
-
-// function signUp(data, auth, db) {
-//   console.log("sing Up ")
-//   let [surname, name, patronymic, email, password] = data;
-//   createUserWithEmailAndPassword(auth, email, password);
-
-//   setDoc(doc(db, `/users/${email}`), {surname: surname, name, patronymic, email})
-//   console.log("Sign Up is successfully");
-// }
