@@ -1,14 +1,16 @@
 import InputForm from "../components/InputForm";
 import SubmitButton from "../components/SubmitButton";
 import Link from "../components/LinkButton";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Context } from "..";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { getDownloadURL, ref, getStorage} from 'firebase/storage';
 import { doc, setDoc } from "firebase/firestore";
 import RegisterFormData from "../constructors/registerFormData";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 export default function Register() {
-  let { auth, db } = useContext(Context);
+  const { auth, db, app } = useContext(Context);
 
   const handleSubmit = async (e, auth, db) => {
     e.preventDefault();
@@ -16,7 +18,7 @@ export default function Register() {
 
     let data = new Array(...form.querySelectorAll("input")).map((e) => e.value);
     data = new RegisterFormData(...data);
-    let { surname, name, patronymic, email, pass } = data;
+    let { surname, name, email, pass, tg } = data;
 
     let notice = form.querySelector("#notice");
 
@@ -32,25 +34,35 @@ export default function Register() {
     });
 
     setDoc(doc(db, `/users/${email}`), {
-      surname: surname,
+      surname,
       name,
-      patronymic,
       email,
+      tg
     }).catch((e) => {
       notice.removeAttribute("hidden");
       notice.innerHTML = e.code;
     });
   };
 
+  useEffect(() => {
+    if(auth.currentUser != null) {
+      window.location.href = "/profile"
+    }
+  }, [auth.currentUser])
+
+  getDownloadURL(ref(getStorage(app), "/png/bg-for-reg-log.png")).then(url => {
+    const div = document.querySelector("[data-bg-image='bg-reg']");
+    div.style.backgroundImage = `url(${url})`
+  })
+
   return (
     <>
-      <p className="text-sky-400 text-xl mt-16">Smart Invest</p>
-
       <form
         onSubmit={(e) => handleSubmit(e, auth, db)}
-        className="flex flex-col items-center w-fit bg-slate-800 px-10 py-7 rounded-2xl space-y-7 mx-auto my-auto"
+        className="flex flex-col items-center w-fit bg-blue-800 bg-no-repeat bg-cover px-16 py-12 rounded-2xl space-y-10 mx-auto my-auto"
+        data-bg-image='bg-reg'
       >
-        <h2 className="text-gray-300 text-3xl">Регистрация</h2>
+        <h2 className="text-3xl">Регистрация</h2>
 
         <p
           id="notice"
@@ -62,7 +74,7 @@ export default function Register() {
           <div className="flex flex-col items-center space-y-3">
             <InputForm type="text" id="surname" placeholder="Фамилия" />
             <InputForm type="text" id="name" placeholder="Имя" />
-            <InputForm type="text" id="patronymic" placeholder="Отчество" />
+            <InputForm className="w-full" type="tg" id="tg" placeholder="Телеграм" />
           </div>
 
           <div className="flex flex-col items-center space-y-3">
@@ -84,7 +96,7 @@ export default function Register() {
             name="conditions"
             id="conditions"
           />
-          <label className="whitespace-pre-line text-sm" htmlFor="conditions">
+          <label className="text-sm" htmlFor="conditions">
             Я принимаю Политику конфиденциальности и <br /> Пользовательские
             положения и условия
           </label>
@@ -92,7 +104,7 @@ export default function Register() {
 
         <SubmitButton text="Зарегистрироваться" />
 
-        <p className="flex flex-col items-center text-gray-300 whitespace-normal">
+        <p className="flex flex-col items-center whitespace-normal">
           Уже есть учетная запись?{" "}
           <Link
             className="text-sky-400 hover:underline"

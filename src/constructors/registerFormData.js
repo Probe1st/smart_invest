@@ -1,15 +1,15 @@
 export default function RegisterFormData(
   surname,
   name,
-  patronymic,
+  tg,
   email,
   pass,
-  repPass
+  repPass,
 ) {
   return {
     surname,
     name,
-    patronymic,
+    tg,
     email,
     pass,
     repPass,

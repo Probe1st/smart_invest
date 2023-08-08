@@ -4,10 +4,11 @@ import Link from "../components/LinkButton";
 import SubmitButton from "../components/SubmitButton";
 import { Context } from "..";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import LoginFormData from '../constructors/loginFormData';
+import LoginFormData from "../constructors/loginFormData";
+import { getDownloadURL, getStorage, ref } from "firebase/storage";
 
 export default function Login() {
-  const { auth } = useContext(Context);
+  const { auth, app } = useContext(Context);
 
   const hadleSubmit = async (e, auth) => {
     e.preventDefault();
@@ -18,35 +19,36 @@ export default function Login() {
 
     let notice = form.querySelector("#notice");
 
-    // validation(auth, data, notice)
-
-    signInWithEmailAndPassword(auth, data.email, data.pass).catch(e => {
-      if(e.code === "auth/user-not-found") {
+    signInWithEmailAndPassword(auth, data.email, data.pass).catch((e) => {
+      if (e.code === "auth/user-not-found") {
         notice.removeAttribute("hidden");
         notice.innerHTML = "пользователь не найден";
-      }else if(e.code ===  "auth/wrong-password") {
+      } else if (e.code === "auth/wrong-password") {
         notice.removeAttribute("hidden");
         notice.innerHTML = "Неверный пароль";
-      }else if(e.code) {
-        notice.removeAttribute('hidden');
+      } else if (e.code) {
+        notice.removeAttribute("hidden");
         notice.innerHTML = e.code;
-      }else {
+      } else {
         notice.setAttribute("hidden", "");
         notice.innerHTML = "";
       }
-
     });
-  }
+  };
+
+  getDownloadURL(ref(getStorage(app), "/png/bg-for-reg-log.png")).then(url => {
+    const div = document.querySelector("[data-bg-image='bg-login']");
+    div.style.backgroundImage = `url(${url})`
+  })
 
   return (
     <>
-      <p className="text-sky-400 text-xl mt-16">Smart Invest</p>
-
       <form
         onSubmit={(e) => hadleSubmit(e, auth)}
-        className="flex flex-col items-center w-fit bg-slate-800 px-10 py-7 rounded-2xl space-y-7 mx-auto my-auto"
+        className="flex flex-col items-center w-fit bg-blue-800 bg-no-repeat bg-cover px-24 py-16 rounded-2xl space-y-14 mx-auto my-auto"
+        data-bg-image='bg-login'
       >
-        <h2 className="text-gray-300 text-3xl">Войти</h2>
+        <h2 className="text-3xl">Вход</h2>
 
         <p
           id="notice"
@@ -55,18 +57,18 @@ export default function Login() {
         ></p>
 
         <div className="flex flex-col items-center space-y-3">
-          <InputForm type="email" id="email" placeholder="email" />
-          <InputForm type="password" id="password" placeholder="password" />
+          <InputForm type="email" id="email" placeholder="почта" />
+          <InputForm type="password" id="password" placeholder="пароль" />
         </div>
 
         <SubmitButton text="Войти" />
 
-        <p className="flex flex-col items-center text-gray-300 whitespace-normal">
+        <p className="flex flex-col items-center whitespace-normal">
           Еще не зарегистрированы?
           <Link
             className="text-sky-400 hover:underline"
             text="Зарегистрироваться"
-            link="/register"
+            link="/registration"
           />
         </p>
       </form>
