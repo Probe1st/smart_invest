@@ -5,10 +5,22 @@ import { Context } from "../..";
 export default function Partners() {
   const { app } = useContext(Context);
 
-  let elems = new Array(8).fill(0);
+  let elems = [
+    "https://alfaforex.ru/",
+    "https://www.fxpro-finance.org/",
+    "https://pepperstone.com/en-af/",
+    "https://admiralmarkets.com/",
+    "https://alpari.com/",
+    "https://www.finam.ru/",
+    "https://libertex.org/",
+    "https://www.forex.com/",
+  ];
+
   elems = elems.map((e, i) => {
     return (
-      <img className="w-32 h-32 rounded-3xl" key={i} alt="partners logo" />
+      <a key={i} href={e}>
+        <img className="w-32 h-32 rounded-3xl" alt="partners logo" />
+      </a>
     );
   });
 
@@ -33,7 +45,9 @@ export default function Partners() {
         className="flex flex-row justify-center space-x-4 w-full py-20 bg-blue-800"
         data-partners-logo
       >
-        <div className="flex flex-row justify-between space-x-4 w-2/3">{elems}</div>
+        <div className="flex flex-wrap items-center justify-around gap-4 w-2/3">
+          {elems}
+        </div>
       </div>
     </div>
   );

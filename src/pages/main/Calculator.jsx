@@ -13,7 +13,7 @@ export default function Calculator() {
   );
 
   return (
-    <form onSubmit={e => handleSubmit(e)} className="calculator">
+    <form onSubmit={(e) => handleSubmit(e)} className="calculator">
       {/* ввод начального взноса и расчет */}
       <div className="grid grid-cols-3 gap-x-14">
         <div
@@ -24,17 +24,17 @@ export default function Calculator() {
             Узнать свой потенциал дохода
           </p>
 
-          <input required type="text" className="button" />
+          <input required type="text" className="button bg-inherit" />
 
           <input
-            onClick={(e) => calculate(e)}
-            className="button py-4 bg-slate-300"
+            onClick={(e) => calculate(e, app)}
+            className="button py-4 bg-slate-400"
             value={"Рассчитать"}
             type="submit"
           />
         </div>
 
-        <div className="border-2 border-blue-900 rounded-3xl"></div>
+        <div data-video="graphic" className="flex flex-row h-full border-2 border-blue-900 rounded-3xl bg-no-repeat bg-cover bg-right" alt=""></div>
 
         <div>
           <img alt="" data-bg-image="calculator" />
@@ -90,11 +90,11 @@ export default function Calculator() {
 }
 
 function handleSubmit(e) {
-  e.preventDefault()
+  e.preventDefault();
 }
 
-function calculate(e) {
-  // e.preventDefault();
+function calculate(e, app) {
+  e.preventDefault();
   const input = e.currentTarget
     .closest("[data-menu-calculator]")
     .querySelector("input");
@@ -103,9 +103,24 @@ function calculate(e) {
   const isValid = validatePayment(initPayment);
   if (isValid === false) {
     input.style.border = "solid 2px red";
+    return;
   } else if (isValid === true) {
     input.style.border = "solid 2px rgb(30 58 138)";
   }
+
+  function getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min;
+  }  
+
+  let randNumb = () => getRandomArbitrary(1, 3).toFixed(0);
+  
+  getDownloadURL(ref(getStorage(app), `/graphics/graphic-${randNumb()}-${randNumb()}.gif`)).then(
+    (url) => {
+      const video = document.querySelector("[data-video='graphic']");
+      // video.setAttribute("src", url);
+      video.style.backgroundImage = `url(${url})`
+    }
+  );
 }
 
 function validatePayment(sum) {

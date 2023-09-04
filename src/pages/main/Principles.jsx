@@ -5,6 +5,14 @@ import { useContext } from "react";
 export default function Principles() {
   const { app } = useContext(Context);
 
+  getDownloadURL(ref(getStorage(app), "/png/bg-for-principles.png"))
+    .then(url => {
+      const imgs = document.querySelectorAll("[data-bg-image='bg-principles']");
+      imgs.forEach(e => {
+        e.style.backgroundImage = `url(${url})`
+      })
+    })
+
   let cardsData = [
     {
       title: "Эксклюзивные алгоритмы",
@@ -26,12 +34,13 @@ export default function Principles() {
 
   cardsData = cardsData.map((e, i) => {
     return (
-      <div className="flex flex-col pb-10 px-4 items-center justify-start bg-blue-800 rounded-2xl" data-principle key={i}>
-        <img className="h-[11.7rem]" alt="" />
+      <div className="flex flex-col pb-10 px-4 items-center justify-start bg-center bg-no-repeat bg-cover bg-blue-800 rounded-2xl" data-bg-image='bg-principles' data-principle key={i}>
+        <img className="max-h-[13rem]" alt="" />
         <div className="">
-          <h2 className="font-bold text-2xl mb-3">{e.title}</h2>
-          <p className="my-auto">{e.disc}</p>
+          <h2 className="font-bold min-h-[3.6rem] line-clamp-2 text-xl mb-3">{e.title}</h2>
+          <p data-unwrap className="text-sm overflow-hidden line-clamp-6 my-auto">{e.disc}</p>
         </div>
+        <button onClick={e => {e.currentTarget.closest("div").querySelector("[data-unwrap]").classList.toggle("line-clamp-6"); if(e.currentTarget.innerHTML !== "Свернуть") {e.currentTarget.innerHTML = "Свернуть"} else { e.currentTarget.innerHTML = "Читать еще..." } ;}} className="bg-white mt-5 rounded-xl text-blue-800 font-semibold px-5 py-1">Читать еще...</button>
       </div>
     );
   });  
@@ -49,7 +58,7 @@ export default function Principles() {
     .catch((e) => console.log(e));
 
   return (
-    <div className="grid grid-cols-4 gap-x-12 w-2/3 mt-20 text-center text-sm">
+    <div className="grid grid-cols-4 items-start gap-x-12 w-2/3 mt-20 text-center text-sm">
       {cardsData}
     </div>
   )

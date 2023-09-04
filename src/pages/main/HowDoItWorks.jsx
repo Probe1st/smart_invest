@@ -15,7 +15,7 @@ export default function HowDoItWorks() {
   });
 
   return (
-    <div className="w-full mt-24 bg-blue-800">
+    <div className="w-full mt-56 bg-blue-800">
       <div className="flex flex-row space-x-8 mx-auto py-7 w-2/3">
         <img src="" alt="graphic" />
         <div className="space-y-5">

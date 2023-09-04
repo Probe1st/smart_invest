@@ -9,6 +9,10 @@ export default function Robots() {
 
   let slides = [
     {
+      header: "TradeAlertPro",
+      disc: "Получай преимущество\n Эта подписка предоставляет вам доступ к лайв торговым ситуациям, которые будут отправляться непосредственно в ваш ЛС в Телеграмме. Забудьте о необходимости проводить множество часов анализируя графики и сигналы – наш робот сделает всю работу за вас. Подписка на TradeAlert Pro – это надежный путь к оптимизации вашей торговли и увеличению шансов на успех на финансовых рынках."
+    },
+    {
       header: "SmartInvestPro",
       disc: " Уникальный алгоритм, специализирующийся на EUR/USD паре, с доходностью до 120% в квартал. Этот робот разработан для тех, кто стремится к максимальным результатам и хочет получать высокую прибыль в короткие сроки на валютном рынке."
     },
@@ -19,7 +23,7 @@ export default function Robots() {
     {
       header: "TradeMastery",
       disc: "Эффективный профессиональный советник, специализирующийся на паре GBP/USD, и обеспечивающий стабильный доход от 15%. TradeMastery - идеальный выбор для трейдеров, желающих минимизировать риски и получать устойчивый доход на долгосрочной основе."
-    }
+    },
   ];
 
   slides.push(...slides);
@@ -27,11 +31,11 @@ export default function Robots() {
   slides = slides.map((e, i) => {
     return (
       <SwiperSlide key={"robot-" + i}>
-        <img data-bg-image="robot" alt="" />
+        <img className='h-[10rem]' data-bg-image="robot" alt="" />
 
         <h3 className='text-2xl font-semibold'>{e.header}</h3>
 
-        <p>{e.disc}</p>
+        <p className='text-sm w-4/5'>{e.disc}</p>
       </SwiperSlide>
     )
   });
@@ -44,7 +48,7 @@ export default function Robots() {
     });
 
     res.items.forEach(async (e, i) => {
-      imgs[i + 3].setAttribute("src", await getDownloadURL(e))
+      imgs[i + 4].setAttribute("src", await getDownloadURL(e))
     });
   })
 
@@ -54,7 +58,7 @@ export default function Robots() {
       spaceBetween={30}
       loop={true}
       modules={[Autoplay]}
-      className='robots-swiper mt-52 w-full'
+      className='robots-swiper mt-72 w-2/3'
       centeredSlides={true}
       autoplay={{
         enabled: true,

@@ -5,13 +5,26 @@ export default function RegisterFormData(
   email,
   pass,
   repPass,
+  purshes,
 ) {
   return {
-    surname,
-    name,
-    tg,
-    email,
-    pass,
-    repPass,
+    dataForCreateAccount: {
+      email,
+      pass,
+      repPass,
+    },
+    dataForCreateCardUser: {
+      surname,
+      name,
+      tg,
+      balance: {
+        number: 50,
+        currency: "$",
+      },
+      referals: 0,
+      purshes: [
+        purshes,
+      ]
+    },
   };
 }

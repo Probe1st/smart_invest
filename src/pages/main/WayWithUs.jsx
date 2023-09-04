@@ -52,7 +52,7 @@ export default function WayWithUs() {
       </div>
 
       <LinkButton
-        link={"/"}
+        link={"/registration"}
         text={"Подключиться"}
         className={
           "flex w-fit mt-5 mx-auto font-bold rounded-full bg-gradient-to-t from-[#193a9f] to-[#2952cd] py-3 px-5 min-w-[8.4rem]"

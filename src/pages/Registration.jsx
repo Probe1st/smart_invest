@@ -1,13 +1,13 @@
 import InputForm from "../components/InputForm";
 import SubmitButton from "../components/SubmitButton";
 import Link from "../components/LinkButton";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { Context } from "..";
-import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { getDownloadURL, ref, getStorage} from 'firebase/storage';
 import { doc, setDoc } from "firebase/firestore";
 import RegisterFormData from "../constructors/registerFormData";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { getFirestore } from 'firebase/firestore';
 
 export default function Register() {
   const { auth, db, app } = useContext(Context);
@@ -17,12 +17,13 @@ export default function Register() {
     let form = e.target;
 
     let data = new Array(...form.querySelectorAll("input")).map((e) => e.value);
-    data = new RegisterFormData(...data);
-    let { surname, name, email, pass, tg } = data;
+    data = new RegisterFormData(...data, "/robots/Default");
+    const { dataForCreateAccount, dataForCreateCardUser } = data;
+    const { email, pass, repPass } = dataForCreateAccount;
 
     let notice = form.querySelector("#notice");
 
-    if (!validatePass(data)) {
+    if (!validatePass(pass, repPass)) {
       notice.removeAttribute("hidden");
       notice.innerHTML = "пароли не совпадают";
       return;
@@ -33,12 +34,7 @@ export default function Register() {
       notice.innerHTML = e.message;
     });
 
-    setDoc(doc(db, `/users/${email}`), {
-      surname,
-      name,
-      email,
-      tg
-    }).catch((e) => {
+    setDoc(doc(db, `/users/${email}`), dataForCreateCardUser).catch((e) => {
       notice.removeAttribute("hidden");
       notice.innerHTML = e.code;
     });
@@ -117,9 +113,7 @@ export default function Register() {
   );
 }
 
-function validatePass(data) {
-  let { pass, repPass } = data;
-
+function validatePass(pass, repPass) {
   if (pass === repPass) return true;
   return false;
 }

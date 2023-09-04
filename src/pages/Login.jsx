@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import InputForm from "../components/InputForm";
 import Link from "../components/LinkButton";
 import SubmitButton from "../components/SubmitButton";
@@ -40,6 +40,12 @@ export default function Login() {
     const div = document.querySelector("[data-bg-image='bg-login']");
     div.style.backgroundImage = `url(${url})`
   })
+
+  useEffect(() => {
+    if(auth.currentUser != null) {
+      window.location.href = "/profile"
+    }
+  }, [auth.currentUser])
 
   return (
     <>

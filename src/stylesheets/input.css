@@ -11,7 +11,7 @@ html {
 }
 
 body {
-  @apply flex flex-col items-center text-lg;
+  @apply flex flex-col items-center text-lg bg-[#E9EEFF];
 }
 
 /* ------------------------------------------------------------------------- */
@@ -26,6 +26,10 @@ body {
 
 .swiper-pagination :nth-child(n) {
   @apply bg-white w-5 h-5;
+}
+
+.mySwiper .simple-card {
+  @apply flex flex-col justify-center w-1/2 space-y-8  z-10;
 }
 
 .simple-card {
@@ -75,7 +79,7 @@ body {
 }
 
 .calculator .button {
-  @apply border-2 rounded-full text-black text-center font-semibold py-4 px-20 w-full h-fit cursor-pointer;
+  @apply border-2 rounded-full text-black text-center font-semibold py-4  w-full h-fit cursor-pointer;
 }
 
 .calculator .button:not([data-active-plane]) {
@@ -88,14 +92,38 @@ body {
 
 /* ------------------------------------------------------------------------- */
 
-.robots-swiper .swiper-slide-prev, .robots-swiper .swiper-slide-next{
+.robots-swiper .swiper-slide-prev, .robots-swiper .swiper-slide-next, .robots-swiper .swiper-slide {
   @apply bg-blue-400 rounded-3xl brightness-75
 }
 
 .robots-swiper .swiper-slide-active {
-  @apply bg-blue-800 rounded-3xl
+  @apply bg-blue-800 rounded-3xl brightness-100
 }
 
 .robots-swiper .swiper-slide {
-  @apply flex flex-col space-y-5 px-6 py-8
+  @apply flex flex-col justify-start space-y-5 px-6 py-8
 }
+
+/* ------------------------------------------------------------------------- */
+
+.status-bar {
+  @apply bg-white w-fit h-fit px-20 py-1 rounded-full text-black
+}
+
+.card-profile {
+  @apply grid grid-cols-2 grid-rows-2 gap-1 text-center;
+}
+
+.card-profile > :nth-child(1n) {
+  @apply flex flex-col items-center justify-end py-16 px-10 space-y-4 bg-blue-800;
+}
+
+.card-profile > :nth-child(4) {
+  @apply justify-between
+}
+
+.card-profile > :nth-child(odd) img {
+  @apply w-36
+}
+
+/* ------------------------------------------------------------------------- */

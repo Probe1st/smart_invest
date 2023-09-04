@@ -1,15 +1,26 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import LinkButton from "./LinkButton";
 import { Context } from "..";
-import { getDownloadURL, getStorage, ref } from "firebase/storage";
 
 export default function Header() {
-  let { app } = useContext(Context);
+  let { auth } = useContext(Context);
 
-  getDownloadURL(ref(getStorage(app), "svg/logo.svg")).then((url) => {
-    const img = document.querySelectorAll("[alt='logo']");
-    img.forEach(e => e.setAttribute("src", url))
-  });
+  // установка лого
+  useEffect(() => {
+    const imgs = document.querySelectorAll("[alt='logo']");
+    imgs.forEach(e => {
+      e.setAttribute("src", process.env.PUBLIC_URL + "logo.svg");
+    });
+  }, []);
+
+  // редирект на с профиля на логин, если нет пользователя
+  useEffect(() => {
+    setTimeout(() => {
+      if(auth.currentUser === null && window.location.href.endsWith("/profile")) {
+        window.location.href = "/login"
+      }
+    }, 10_000);
+  }, [auth.currentUser]);
 
   return (
     <header className="flex flex-row items-center w-2/3 py-5 justify-between">

@@ -29,8 +29,7 @@ export default function FirstSwiper() {
 
   dataForCard = dataForCard.map((e, i) => {
     return (
-      <SwiperSlide className="bg-blue-950" key={i}>
-        <img className="absolute w-full h-full opacity-20" data-bg-image="swiper" alt="" />
+      <SwiperSlide data-bg-image="swiper" className="bg-blue-950 opacity-90 bg-center bg-no-repeat bg-cover bg-blend-soft-light" key={i}>
         <div className="simple-card">
           <h2>{e.header}</h2>
           <p>{e.disc}</p>
@@ -45,7 +44,7 @@ export default function FirstSwiper() {
 
       res.items.forEach((e, i) => {
         getDownloadURL(ref(getStorage(app), `/${e.fullPath}`)).then((url) => {
-          elems[i].setAttribute("src", url);
+          elems[i].style.backgroundImage = `url(${url})`
         });
       });
     })
@@ -63,7 +62,7 @@ export default function FirstSwiper() {
       className="mySwiper"
       autoplay={{
         enabled: true,
-        delay: 3000,
+        delay: 5000,
         disableOnInteraction: false
       }}
     >

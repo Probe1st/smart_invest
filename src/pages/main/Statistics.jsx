@@ -31,25 +31,25 @@ export default function Statistics() {
         <div className="space-y-12 self-end">
           <div className="flex flex-row justify-center space-x-6">
             <div className="child-centerd">
-              <p className="text-blue-400">1377</p>
+              <p className="text-green-400">1377</p>
               <p>Активные торговые советники</p>
             </div>
 
             <div className="child-centerd">
-              <p className="text-blue-400">14</p>
+              <p className="text-green-400">14</p>
               <p>Новых подключений за месяц</p>
             </div>
           </div>
 
           <div className="child-centerd">
             <p>Оборот средств на счетах наших клиентов</p>
-            <p className="text-blue-400">12.190.300$ +</p>
+            <p className="text-green-400">12.190.300$ +</p>
           </div>
 
           <div className="child-centerd">
             <p>
               Средний квартальный доход{" "}
-              <span className="text-blue-400">186%</span>
+              <span className="text-green-400">186%</span>
             </p>
           </div>
         </div>
