@@ -7,7 +7,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { getDownloadURL, ref, getStorage} from 'firebase/storage';
 import { doc, setDoc } from "firebase/firestore";
 import RegisterFormData from "../constructors/registerFormData";
-import { getFirestore } from 'firebase/firestore';
+// import { getFirestore } from 'firebase/firestore';
 
 export default function Register() {
   const { auth, db, app } = useContext(Context);

@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import LinkButton from "./LinkButton";
 import { Context } from "..";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   let { auth } = useContext(Context);
@@ -17,7 +18,7 @@ export default function Header() {
   useEffect(() => {
     setTimeout(() => {
       if(auth.currentUser === null && window.location.href.endsWith("/profile")) {
-        window.location.href = "/login"
+        window.location.href = "/login";
       }
     }, 10_000);
   }, [auth.currentUser]);
@@ -25,37 +26,33 @@ export default function Header() {
   return (
     <header className="flex flex-row items-center w-2/3 py-5 justify-between">
       <div className="flex flex-row items-center space-x-4">
-        <img className="w-12" alt="logo" />
+        <Link to={"/"}><img className="w-12" alt="logo" /></Link>
 
         <div className="space-x-2">
-          <LinkButton
-            link={"/"}
+          <Link
+            to={"/"}
             className="font-bold text-xl text-black"
-            text={"SMART"}
-          />
-          <LinkButton
-            link={"/"}
+          >SMART</Link>
+          <Link
+            to={"/"}
             className={"font-bold text-xl text-blue-800"}
-            text={"INVEST"}
-          />
+          >INVEST</Link>
         </div>
       </div>
 
       <div className="flex flex-row space-x-5">
-        <LinkButton
-          link={"registration"}
-          text={"Регистрация"}
+        <Link
+          to={"registration"}
           className={
             "flex font-bold rounded-full bg-gradient-to-t from-[#193a9f] to-[#2952cd] py-3 px-5 min-w-[8.4rem]"
           }
-        />
-        <LinkButton
-          link={"login"}
-          text={"Вход"}
+        >Регистрация</Link>
+        <Link
+          to={"login"}
           className={
             "flex font-bold rounded-full border border-black justify-center py-3 px-5 min-w-[8.4rem] text-black"
           }
-        />
+        >Вход</Link>
       </div>
     </header>
   );

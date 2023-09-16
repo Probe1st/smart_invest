@@ -34,9 +34,9 @@ export default function Principles() {
 
   cardsData = cardsData.map((e, i) => {
     return (
-      <div className="flex flex-col pb-10 px-4 items-center justify-start bg-center bg-no-repeat bg-cover bg-blue-800 rounded-2xl" data-bg-image='bg-principles' data-principle key={i}>
-        <img className="max-h-[13rem]" alt="" />
-        <div className="">
+      <div className="flex flex-col pt-5 pb-10 px-4 items-center justify-start bg-center bg-no-repeat bg-cover bg-blue-800 rounded-2xl" data-bg-image='bg-principles' data-principle key={i}>
+        <img className="h-[10rem]" alt="" />
+        <div>
           <h2 className="font-bold min-h-[3.6rem] line-clamp-2 text-xl mb-3">{e.title}</h2>
           <p data-unwrap className="text-sm overflow-hidden line-clamp-6 my-auto">{e.disc}</p>
         </div>

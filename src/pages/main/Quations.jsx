@@ -26,8 +26,6 @@ let questions = [
 
 export default function Quations() {
 
-
-
   return (
     <div className="text-black w-full mt-44">
       <div className="w-2/3 mx-auto">
@@ -36,14 +34,14 @@ export default function Quations() {
 
       <div className="mt-10">
         {questions.map(e => {
-          return <Question text={e} />
+          return <Question text={e} key={e.question} />
         })}
       </div>
     </div>
   );
 }
 
-function Question({ text }) {
+function Question({ text}) {
   let [showAnswer, setShowAnswer] = useState(false);
 
   return (
