@@ -1,4 +1,4 @@
-import LinkButton from "../../components/LinkButton";
+import { Link } from "react-router-dom";
 
 export default function WayWithUs() {
   let dataForCard = [
@@ -51,13 +51,12 @@ export default function WayWithUs() {
         <div className="way">{dataForCard}</div>
       </div>
 
-      <LinkButton
-        link={"/registration"}
-        text={"Подключиться"}
+      <Link
+        to={"/registration"}
         className={
           "flex w-fit mt-5 mx-auto font-bold rounded-full bg-gradient-to-t from-[#193a9f] to-[#2952cd] py-3 px-5 min-w-[8.4rem]"
         }
-      />
+      >Подключиться</Link>
     </div>
   );
 }

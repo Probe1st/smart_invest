@@ -1,35 +1,25 @@
 import { useContext, useEffect } from "react";
 import { Context } from "..";
-import { getDownloadURL, getStorage, ref } from "firebase/storage";
-import LinkButton from "./LinkButton";
+import { Link } from "react-router-dom";
+import SetSrcImage from "./SetSrcImage";
+import SetBgImage from "./SetBgImage";
 
 export default function ReferalNotice() {
-  const { app, auth } = useContext(Context);
+  const { auth } = useContext(Context);
 
-  getDownloadURL(ref(getStorage(app), "png/helicopter-bot.png")).then((url) => {
-    const img = document.querySelector("[data-bg-image='helecopter-bot']");
-    img.setAttribute("src", url);
-  });
+  SetSrcImage("/png/helicopter-bot.png", "helecopter-bot");
 
-  getDownloadURL(ref(getStorage(app), "png/notice-ref-bg.png")).then((url) => {
-    const div = document.querySelector("[data-bg-image='ref-notice']");
-    div.style.backgroundImage = `url(${url})`;
-  });
+  SetBgImage("/png/notice-ref-bg.png", "ref-notice");
 
-  getDownloadURL(ref(getStorage(app), "/robots/robot3.png")).then((url) => {
-    const img = document.querySelector("[data-bg-image='notice-robot']");
-    img.setAttribute("src", url);
-  });
+  SetSrcImage("/robots/robot3.png", 'notice-robot');
 
-  getDownloadURL(ref(getStorage(app), "png/x.png")).then((url) => {
-    const div = document.querySelector("[data-bg-image='x']");
-    div.style.backgroundImage = `url(${url})`;
-  });
+  SetBgImage("/png/x.png", 'x');
 
+  // ПЕРЕДЕЛАТЬ ПРОВЕРКУ ПОЛЬЗОВАТЕЛЯ ЧЕРЕЗ useAuthState
   useEffect(() => {
     const notice = document.querySelector("[data-notice]");
 
-    if(auth.currentUser === null) {
+    if (auth.currentUser === null) {
       notice.removeAttribute("hidden")
     } else {
       notice.setAttribute("hidden", "");
@@ -44,7 +34,7 @@ export default function ReferalNotice() {
       >
         <img
           className="absolute top-2 left-5 rounded-full w-2/12"
-          data-bg-image="helecopter-bot"
+          data-src-image="helecopter-bot"
           alt=""
         />
 
@@ -57,18 +47,17 @@ export default function ReferalNotice() {
             робота.
           </p>
 
-          <LinkButton
+          <Link
             className={
               "px-8 py-2 rounded-xl text-blue-600 font-semibold bg-white"
             }
-            text={"Регистрация"}
-            link={"registration"}
-          />
+            to={"/registration"}
+          >Регистрация</Link>
         </div>
 
         <img
           className="absolute bottom-1 right-5 rounded-full w-2/12"
-          data-bg-image='notice-robot'
+          data-src-image='notice-robot'
           alt=""
         />
       </div>

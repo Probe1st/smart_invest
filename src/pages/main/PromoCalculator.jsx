@@ -1,22 +1,15 @@
-import { ref, getStorage, getDownloadURL } from "firebase/storage";
-import { useContext } from "react";
-import { Context } from "../..";
+import SetBgImage from "../../components/SetBgImage";
+import SetSrcImage from "../../components/SetSrcImage";
 
 export default function PromoCalculator() {
-  const { app } = useContext(Context);
+  SetSrcImage("/png/banknotes.png", "banknotes");
 
-  getDownloadURL(ref(getStorage(app), "/png/banknotes.png")).then(url => {
-    const img = document.querySelector('[data-bg-image="banknotes"]');
-    img.setAttribute("src", url);
-  });
+  SetSrcImage("/png/ipoh_touch.png", "ipoh-touch" )
 
-  getDownloadURL(ref(getStorage(app), "/png/ipoh_touch.png")).then(url => {
-    const img = document.querySelector('[data-bg-image="ipoh-touch"]');
-    img.setAttribute("src", url);
-  });
+  SetBgImage("/png/bg-promocalculator.png", "bg-promocalculator")
 
   return (
-    <div className="w-full mt-40 bg-blue-800 text-center">
+    <div className="w-full mt-40 bg-blue-900 text-center bg-no-repeat bg-center bg-cover bg-blend-overlay" data-bg-image="bg-promocalculator">
       <div className="flex flex-row justify-between text-lg w-2/3 mx-auto">
         <div className="flex flex-col justify-between">
           <div></div>
@@ -25,8 +18,8 @@ export default function PromoCalculator() {
         </div>
 
         <div className="flex flex-col items-center justify-end w-3/12">
-          <img className="relative bottom-16" data-bg-image="ipoh-touch" alt="" />
-          <img className="absolute" data-bg-image="banknotes" alt="" />
+          <img className="relative bottom-16" data-src-image="ipoh-touch" alt="" />
+          <img className="absolute" data-src-image="banknotes" alt="" />
         </div>
 
         <div className="flex flex-col justify-between">

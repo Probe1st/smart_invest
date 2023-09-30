@@ -1,21 +1,10 @@
-import { useContext } from "react";
-import { Context } from "../..";
-import { getDownloadURL, getStorage, ref } from "firebase/storage";
+import SetSrcImage from "../../components/SetSrcImage";
+import SetBgImage from "../../components/SetBgImage";
 
 export default function Statistics() {
-  const { app } = useContext(Context);
+  SetSrcImage("/png/robot-eva.png", 'robot-eva');
 
-  getDownloadURL(ref(getStorage(app), "/png/robot-eva.png")).then((url) => {
-    const img = document.querySelector("[data-bg-image='robot-eva']");
-    img.setAttribute("src", url);
-  });
-
-  getDownloadURL(ref(getStorage(app), "/png/bg-for-statistic.png")).then(
-    (url) => {
-      const img = document.querySelector("[data-bg-image='bg-for-statistic']");
-      img.style.backgroundImage = `url(${url})`
-    }
-  );
+  SetBgImage("/png/bg-for-statistic.png", 'bg-for-statistic');
 
   return (
     <div className="w-full mt-44 pt-16 pb-6 bg-blue-800 bg-cover bg-center" data-bg-image="bg-for-statistic">
@@ -25,7 +14,7 @@ export default function Statistics() {
         </div>
 
         <div className="w-4/12">
-          <img className="absolute mt-[-8rem]" data-bg-image="robot-eva" alt="" />
+          <img className="absolute mt-[-8rem]" data-src-image="robot-eva" alt="" />
         </div>
 
         <div className="space-y-12 self-end">

@@ -5,14 +5,6 @@ import { useContext } from "react";
 export default function Principles() {
   const { app } = useContext(Context);
 
-  getDownloadURL(ref(getStorage(app), "/png/bg-for-principles.png"))
-    .then(url => {
-      const imgs = document.querySelectorAll("[data-bg-image='bg-principles']");
-      imgs.forEach(e => {
-        e.style.backgroundImage = `url(${url})`
-      })
-    })
-
   let cardsData = [
     {
       title: "Эксклюзивные алгоритмы",
@@ -40,10 +32,10 @@ export default function Principles() {
           <h2 className="font-bold min-h-[3.6rem] line-clamp-2 text-xl mb-3">{e.title}</h2>
           <p data-unwrap className="text-sm overflow-hidden line-clamp-6 my-auto">{e.disc}</p>
         </div>
-        <button onClick={e => {e.currentTarget.closest("div").querySelector("[data-unwrap]").classList.toggle("line-clamp-6"); if(e.currentTarget.innerHTML !== "Свернуть") {e.currentTarget.innerHTML = "Свернуть"} else { e.currentTarget.innerHTML = "Читать еще..." } ;}} className="bg-white mt-5 rounded-xl text-blue-800 font-semibold px-5 py-1">Читать еще...</button>
+        <button onClick={e => { e.currentTarget.closest("div").querySelector("[data-unwrap]").classList.toggle("line-clamp-6"); if (e.currentTarget.innerHTML !== "Свернуть") { e.currentTarget.innerHTML = "Свернуть" } else { e.currentTarget.innerHTML = "Читать еще..." }; }} className="bg-white mt-5 rounded-xl text-blue-800 font-semibold px-5 py-1">Читать еще...</button>
       </div>
     );
-  });  
+  });
 
   listAll(ref(getStorage(app), "/principles/"))
     .then((res) => {

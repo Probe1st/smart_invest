@@ -27,7 +27,7 @@ let questions = [
 export default function Quations() {
 
   return (
-    <div className="text-black w-full mt-44">
+    <div className="text-black w-full mt-20">
       <div className="w-2/3 mx-auto">
         <h2 className="font-bold text-3xl">Вопрос-ответ</h2>
       </div>

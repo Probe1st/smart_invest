@@ -1,16 +1,13 @@
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import { useContext } from "react";
 import { Context } from "../..";
+import SetSrcImage from "../../components/SetSrcImage";
 
 export default function Calculator() {
   const { app } = useContext(Context);
 
-  getDownloadURL(ref(getStorage(app), "/png/calculator-img.png")).then(
-    (url) => {
-      const img = document.querySelector('[data-bg-image="calculator"]');
-      img.setAttribute("src", url);
-    }
-  );
+  SetSrcImage("/png/calculator-img.png", "calculator");
+
 
   return (
     <form onSubmit={(e) => handleSubmit(e)} className="calculator">
@@ -24,7 +21,7 @@ export default function Calculator() {
             Узнать свой потенциал дохода
           </p>
 
-          <input required type="text" className="button bg-inherit" />
+          <input required type="text" placeholder="100" className="button bg-inherit" />
 
           <input
             onClick={(e) => calculate(e, app)}
@@ -37,7 +34,7 @@ export default function Calculator() {
         <div data-video="graphic" className="flex flex-row h-full border-2 border-blue-900 rounded-3xl bg-no-repeat bg-cover bg-right" alt=""></div>
 
         <div>
-          <img alt="" data-bg-image="calculator" />
+          <img alt="" data-src-image="calculator" />
         </div>
       </div>
 

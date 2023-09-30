@@ -1,17 +1,20 @@
 import InputForm from "../components/InputForm";
 import SubmitButton from "../components/SubmitButton";
-import Link from "../components/LinkButton";
 import { useContext, useEffect } from "react";
 import { Context } from "..";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { getDownloadURL, ref, getStorage} from 'firebase/storage';
 import { doc, setDoc } from "firebase/firestore";
 import RegisterFormData from "../constructors/registerFormData";
-// import { getFirestore } from 'firebase/firestore';
+import { Link, useNavigate } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import SetBgImage from "../components/SetBgImage";
 
 export default function Register() {
-  const { auth, db, app } = useContext(Context);
+  const { auth, db } = useContext(Context);
+  const navigate = useNavigate();
+  const user = useAuthState(auth);
 
+  // handling form 
   const handleSubmit = async (e, auth, db) => {
     e.preventDefault();
     let form = e.target;
@@ -40,16 +43,14 @@ export default function Register() {
     });
   };
 
+  // rediret to profile if user is exists
   useEffect(() => {
-    if(auth.currentUser != null) {
-      window.location.href = "/profile"
+    if (user[0]) {
+      navigate("/profile");
     }
-  }, [auth.currentUser])
+  }, [user, navigate]);
 
-  getDownloadURL(ref(getStorage(app), "/png/bg-for-reg-log.png")).then(url => {
-    const div = document.querySelector("[data-bg-image='bg-reg']");
-    div.style.backgroundImage = `url(${url})`
-  })
+  SetBgImage("/png/bg-for-reg-log.png", 'bg-reg');
 
   return (
     <>
@@ -104,9 +105,8 @@ export default function Register() {
           Уже есть учетная запись?{" "}
           <Link
             className="text-sky-400 hover:underline"
-            text="Войти"
-            link="/login"
-          />
+            to="/login"
+          >Войти</Link>
         </p>
       </form>
     </>

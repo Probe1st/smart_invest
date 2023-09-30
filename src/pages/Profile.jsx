@@ -1,26 +1,28 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Context } from "..";
-import { ref, getDownloadURL, getStorage } from "firebase/storage";
 import { doc, getDoc, getFirestore } from "firebase/firestore";
 import { signOut } from 'firebase/auth';
-import LinkButton from '../components/LinkButton';
+import { Link, useNavigate } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import SetSrcImage from "../components/SetSrcImage";
 
 export default function Profile() {
   const { app, auth } = useContext(Context);
+  const user = useAuthState(auth);
+  const navigate = useNavigate();
+
+  // redirect to profile if user is NOT exists 
+  useEffect(() => {
+    if (!user[0]) {
+      navigate("/login");
+    }
+  }, [user, navigate]);
 
   setDataUser(app, auth);
 
-  getDownloadURL(ref(getStorage(app), "/profile/bank.png")).then((url) => {
-    const img = document.querySelector("[data-bg-image='bank']");
-    img.setAttribute("src", url);
-  });
+  SetSrcImage("/profile/bank.png", 'bank');
 
-  getDownloadURL(ref(getStorage(app), "/profile/smart-human.png")).then(
-    (url) => {
-      const img = document.querySelector("[data-bg-image='smart-human']");
-      img.setAttribute("src", url);
-    }
-  );
+  SetSrcImage("/profile/smart-human.png", 'smart-human');
 
   return (
     <div className="card-profile">
@@ -37,7 +39,7 @@ export default function Profile() {
 
       {/* Баланс */}
       <div>
-        <img data-bg-image="bank" alt="" />
+        <img data-src-image="bank" alt="" />
 
         <h2>На вашем счету</h2>
 
@@ -48,7 +50,7 @@ export default function Profile() {
 
       {/* реферал */}
       <form>
-        <img data-bg-image="smart-human" alt="" />
+        <img data-src-image="smart-human" alt="" />
 
         <div className="status-bar">
           <p>Пригласи 3 реферала и получи <br />торгового советника бесплатно</p>
@@ -62,17 +64,17 @@ export default function Profile() {
         <h2 className="justify-self-start text-2xl">Пополнить баланс</h2>
 
         <div className="flex flex-col justify-between space-y-2 w-full text-black">
-          <LinkButton className={"w-full bg-purple-300 px-5 py-1 rounded-full"} text={"Visa / MasterCard"} />
+          <Link className={"w-full bg-purple-300 px-5 py-1 rounded-full"} >Visa / MasterCard</Link>
           <div className="flex flex-row justify-between space-x-2">
-            <LinkButton className={"bg-white px-4 py-1 w-full rounded-3xl"} text={"Btc"} />
-            <LinkButton className={"bg-white px-4 py-1 w-full rounded-3xl"} text={"Usdt"} />
+            <Link className={"bg-white px-4 py-1 w-full rounded-3xl"} >Btc</Link>
+            <Link className={"bg-white px-4 py-1 w-full rounded-3xl"} >Usdt</Link>
           </div>
         </div>
 
-        <LinkButton className={"bg-blue-500 px-20 py-2 w-fit rounded-3xl text-2xl"} text={"Пополнить"} />
+        <Link className={"bg-blue-500 px-20 py-2 w-fit rounded-3xl text-2xl"} >Пополнить</Link>
       </div>
 
-      <button onClick={() => {signOut(auth); window.location.href = "/login"}}>выйти</button>
+      <button onClick={() => { signOut(auth); navigate('/login') }}>выйти</button>
     </div>
   );
 }
@@ -87,14 +89,14 @@ async function setDataUser(app, auth) {
   const { currency, number } = data.balance;
   balance.innerHTML = number + currency;
 
-  if(data.purshe) {
+  if (data.purshe) {
     let robot = await getDoc(doc(getFirestore(app), data.purshe));
 
     const robotImg = robot.data().linkImage;
 
     const img = document.querySelector("[data-bg-image='robot']");
     img.setAttribute("src", robotImg);
-  
+
     const name = document.querySelector("[data-robot]");
     name.innerHTML = robot.id;
   }

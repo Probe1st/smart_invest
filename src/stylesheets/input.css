@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html {
-  @apply font-[Montserrat]; 
+  @apply font-[Montserrat];
 }
 
 #root {
@@ -16,11 +16,11 @@ body {
 
 /* ------------------------------------------------------------------------- */
 
-.swiper-slide {
+.firstSwiper .swiper-slide {
   @apply flex flex-row items-center justify-center text-center py-20 h-auto;
 }
 
-.mySwiper {
+.firstSwiper {
   @apply w-full m-0 h-[40rem];
 }
 
@@ -28,41 +28,41 @@ body {
   @apply bg-white w-5 h-5;
 }
 
-.mySwiper .simple-card {
-  @apply flex flex-col justify-center w-1/2 space-y-8  z-10;
+.firstSwiper .simple-card {
+  @apply flex flex-col justify-center w-1/2 space-y-8 z-10;
 }
 
+/* ------------------------------------------------------------------------- */
 .simple-card {
-  @apply flex flex-col justify-center w-9/12 space-y-8  z-10;
+  @apply flex flex-col justify-center w-9/12 space-y-8 z-10;
 }
 
 .simple-card h2 {
   @apply text-3xl font-bold;
 }
-
 /* ------------------------------------------------------------------------- */
 
 .way {
   @apply flex flex-row justify-evenly w-2/3 mx-auto text-black;
 }
 
-.way > :nth-child(1) {
+.way> :nth-child(1) {
   @apply relative right-[6rem] 2xl:right-0 top-[7em]
 }
 
-.way > :nth-child(2) {
+.way> :nth-child(2) {
   @apply relative right-[3rem] 2xl:right-0
 }
 
-.way > :nth-child(3) {
+.way> :nth-child(3) {
   @apply relative top-[8rem] right-[1rem]
 }
 
-.way > :nth-child(4) {
+.way> :nth-child(4) {
   @apply relative 2xl:left-[1em] left-[4rem]
 }
 
-.way > :nth-child(5) {
+.way> :nth-child(5) {
   @apply relative top-[7em] 2xl:left-[1em] left-[6rem]
 }
 
@@ -79,7 +79,7 @@ body {
 }
 
 .calculator .button {
-  @apply border-2 rounded-full text-black text-center font-semibold py-4  w-full h-fit cursor-pointer;
+  @apply border-2 rounded-full text-black text-center font-semibold py-4 w-full h-fit cursor-pointer;
 }
 
 .calculator .button:not([data-active-plane]) {
@@ -92,16 +92,18 @@ body {
 
 /* ------------------------------------------------------------------------- */
 
-.robots-swiper .swiper-slide-prev, .robots-swiper .swiper-slide-next, .robots-swiper .swiper-slide {
-  @apply bg-blue-400 rounded-3xl brightness-75
+.robots-swiper .swiper-slide {
+  @apply flex flex-col items-center justify-start text-center space-y-5  py-8 h-auto;
+}
+
+.robots-swiper .swiper-slide-prev,
+.robots-swiper .swiper-slide-next,
+.robots-swiper .swiper-slide {
+  @apply bg-[#16338E80] rounded-3xl brightness-90 bg-cover bg-center bg-blend-overlay;
 }
 
 .robots-swiper .swiper-slide-active {
-  @apply bg-blue-800 rounded-3xl brightness-100
-}
-
-.robots-swiper .swiper-slide {
-  @apply flex flex-col justify-start space-y-5 px-6 py-8
+  @apply bg-[#16338E99] rounded-3xl brightness-100 bg-cover bg-center bg-blend-screen
 }
 
 /* ------------------------------------------------------------------------- */
@@ -114,16 +116,36 @@ body {
   @apply grid grid-cols-2 grid-rows-2 gap-1 text-center;
 }
 
-.card-profile > :nth-child(1n) {
+.card-profile> :nth-child(1n) {
   @apply flex flex-col items-center justify-end py-16 px-10 space-y-4 bg-blue-800;
 }
 
-.card-profile > :nth-child(4) {
+.card-profile> :nth-child(4) {
   @apply justify-between
 }
 
-.card-profile > :nth-child(odd) img {
+.card-profile> :nth-child(odd) img {
   @apply w-36
 }
 
 /* ------------------------------------------------------------------------- */
+
+.characteristics {
+  @apply grid grid-cols-3 grid-rows-3 mt-16;
+}
+
+.characteristics> :nth-child(1),
+.characteristics> :nth-child(4),
+.characteristics> :nth-child(7) {
+  @apply justify-self-end
+}
+
+.characteristics> :nth-child(2),
+.characteristics> :nth-child(5),
+.characteristics> :nth-child(8) {
+  @apply justify-self-center
+}
+
+.characteristics> :nth-child(3n + 3) {
+  @apply justify-self-start
+}

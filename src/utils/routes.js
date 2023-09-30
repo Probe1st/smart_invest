@@ -1,8 +1,9 @@
+import ErrorPage from "../pages/ErrorPage";
 import Login from "../pages/Login";
 import Profile from "../pages/Profile";
 import Register from "../pages/Registration";
 import Main from "../pages/main/Main";
-import { LOGIN_ROUTE, MAIN_ROUTE, PROFILE_ROUTE, REGISTER_ROUTE } from "./consts";
+import { ERROR_PAGE, LOGIN_ROUTE, MAIN_ROUTE, PROFILE_ROUTE, REGISTER_ROUTE } from "./consts";
 
 export const publicRoutes = [
   {
@@ -17,6 +18,10 @@ export const publicRoutes = [
     path: REGISTER_ROUTE,
     Component: Register
   },
+  {
+    path: ERROR_PAGE,
+    Component: ErrorPage
+  }
 ];
 
 export const privateRoutes = [

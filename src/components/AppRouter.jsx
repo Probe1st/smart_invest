@@ -1,10 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import { privateRoutes, publicRoutes } from "../utils/routes";
-import Main from "../pages/main/Main";
-import Profile from "../pages/Profile";
 import { useContext } from "react";
 import { Context } from "..";
 import { useAuthState } from "react-firebase-hooks/auth";
+import ErrorPage from "../pages/ErrorPage";
 
 export default function AppRouter() {
   let { auth } = useContext(Context);
@@ -18,14 +17,14 @@ export default function AppRouter() {
       {publicRoutes.map(({ path, Component }) => {
         return <Route key={path} path={path} Component={Component} />;
       })}
-      <Route key={"/profile"} path="/profile" element={<Profile />} />
+      <Route key={"/error"} path="/*" element={<ErrorPage />} />
     </Routes>
   ) : (
     <Routes>
       {publicRoutes.map(({ path, Component }) => {
         return <Route key={path} path={path} Component={Component} />;
       })}
-      <Route key={"/"} path="/" element={<Main />} />
+      <Route key={"/error"} path="/*" element={<ErrorPage />} />
     </Routes>
   );
 }

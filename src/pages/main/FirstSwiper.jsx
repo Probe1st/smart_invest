@@ -59,7 +59,7 @@ export default function FirstSwiper() {
       }}
       rewind={true}
       modules={[Pagination, Autoplay]}
-      className="mySwiper"
+      className="firstSwiper"
       autoplay={{
         enabled: true,
         delay: 5000,

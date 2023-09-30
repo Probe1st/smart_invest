@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import { Context } from "../..";
 import { getDownloadURL, getStorage, listAll, ref } from "firebase/storage";
+import SetBgImage from "../../components/SetBgImage";
+import SetSrcImage from "../../components/SetSrcImage";
 
 export default function Transactions() {
   const { app } = useContext(Context);
@@ -34,23 +36,20 @@ export default function Transactions() {
     },
   ];
 
-  getDownloadURL(ref(getStorage(app), "/png/Vector.png")).then(url => {
-    const imgs = document.querySelectorAll("[data-bg-image='vetcor-r']");
-    imgs.forEach(e => {
-      e.setAttribute("src", url)
-    })
-  })
+  SetSrcImage("/png/Vector.png", 'vetcor-r', true);
+
+  SetBgImage("/png/bg-transactions.png", "bg-transactions", true);
 
   dataForCard = dataForCard.map((e, i) => {
     const currency = ['€', 'p', '$', "₸", ]
     return (
-      <div className="flex flex-row justify-between items-center w-full px-12 py-2 border-2 border-blue-950 rounded-3xl text-2xl" key={i}>
+      <div className="flex flex-row justify-between items-center w-full px-12 py-2 border-2 border-blue-950 rounded-3xl text-2xl bg-cover bg-center bg-no-repeat" key={i} data-bg-image={"bg-transactions"}>
         <div className="flex flex-row justify-between items-center space-x-8">
           <img className="w-20 h-20 " alt="" data-bg-image='logo-bank'/>
           <p className="font-semibold">ID***{e.id}</p>
         </div>
 
-        <img className="w-14 h-10" alt="" data-bg-image='vetcor-r'/>
+        <img className="w-14 h-10" alt="" data-src-image={'vetcor-r'} />
 
         <div>
           <p>+ <span className="font-semibold text-blue-500">{e.sum}</span> {currency[i]}</p>
@@ -58,6 +57,7 @@ export default function Transactions() {
       </div>
     );
   });
+
   return (
     <div className="grid grid-rows-4 gap-y-5 mt-28 w-2/3 text-black">
       {dataForCard}

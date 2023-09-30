@@ -1,23 +1,18 @@
-import { getDownloadURL, getStorage, ref } from "firebase/storage";
-import { useContext } from "react";
-import { Context } from "../..";
+import SetBgImage from "../../components/SetBgImage";
+import SetSrcImage from "../../components/SetSrcImage";
 
 export default function HowDoItWorks() {
-  const { app } = useContext(Context);
 
-  getDownloadURL(ref(getStorage(app), "/png/graphic.png")).then((url) => {
-    const img = document.querySelector("[alt='graphic']");
-    img.setAttribute("src", url);
-  });
-  getDownloadURL(ref(getStorage(app), "/png/money.png")).then((url) => {
-    const img = document.querySelector("[data-bg-image='money']");
-    img.style.backgroundImage = `url(${url})`;
-  });
+  SetSrcImage("/png/graphic.png", 'howdoitwork-graphic');
+
+  SetBgImage("/png/money.png", 'money');
+
+  SetBgImage("/png/bg-howdoitworks.png", "bg-howdoitworks")
 
   return (
-    <div className="w-full mt-56 bg-blue-800">
+    <div className="w-full mt-44 bg-blue-800 bg-no-repeat bg-cover bg-center bg-blend-overlay" data-bg-image="bg-howdoitworks">
       <div className="flex flex-row space-x-8 mx-auto py-7 w-2/3">
-        <img src="" alt="graphic" />
+        <img alt="" data-src-image="howdoitwork-graphic" />
         <div className="space-y-5">
           <h2 className="font-bold text-3xl">Как это работает?</h2>
           <div className="w-full h-36 bg-auto bg-center" data-bg-image="money"></div>

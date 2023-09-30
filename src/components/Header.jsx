@@ -1,31 +1,11 @@
-import { useContext, useEffect } from "react";
-import { Context } from "..";
 import { Link } from "react-router-dom";
 
 export default function Header() {
-  let { auth } = useContext(Context);
-
-  // установка лого
-  useEffect(() => {
-    const imgs = document.querySelectorAll("[alt='logo']");
-    imgs.forEach(e => {
-      e.setAttribute("src", process.env.PUBLIC_URL + "logo.svg");
-    });
-  }, []);
-
-  // редирект на с профиля на логин, если нет пользователя
-  useEffect(() => {
-    setTimeout(() => {
-      if(auth.currentUser === null && window.location.href.endsWith("/profile")) {
-        window.location.href = "/login";
-      }
-    }, 10_000);
-  }, [auth.currentUser]);
 
   return (
     <header className="flex flex-row items-center w-2/3 py-5 justify-between">
       <div className="flex flex-row items-center space-x-4">
-        <Link to={"/"}><img className="w-12" alt="logo" /></Link>
+        <Link to={"/"}><img className="w-12" src={process.env.PUBLIC_URL + "logo.svg"} alt="logo" /></Link>
 
         <div className="space-x-2">
           <Link

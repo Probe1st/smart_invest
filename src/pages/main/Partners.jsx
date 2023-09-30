@@ -1,6 +1,7 @@
 import { listAll, ref, getStorage, getDownloadURL } from "firebase/storage";
 import { useContext } from "react";
 import { Context } from "../..";
+import SetBgImage from "../../components/SetBgImage";
 
 export default function Partners() {
   const { app } = useContext(Context);
@@ -36,14 +37,17 @@ export default function Partners() {
     })
     .catch((e) => console.log(e));
 
+  SetBgImage("/png/bg-partners.png", "bg-partners");
+  
   return (
-    <div className="space-y-16 mt-36 w-full">
+    <div className="space-y-16 mt-16 w-full">
       <h2 className="mt-10 text-4xl font-bold text-black text-center">
         Наши партнеры
       </h2>
       <div
-        className="flex flex-row justify-center space-x-4 w-full py-20 bg-blue-800"
+        className="flex flex-row justify-center space-x-4 w-full py-20 bg-cover bg-center bg-no-repeat bg-blue-800"
         data-partners-logo
+        data-bg-image='bg-partners'
       >
         <div className="flex flex-wrap items-center justify-around gap-4 w-2/3">
           {elems}

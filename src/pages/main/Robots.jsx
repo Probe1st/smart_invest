@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Context } from '../..';
+import SetBgImage from '../../components/SetBgImage';
 
 export default function Robots() {
   const { app } = useContext(Context);
@@ -30,12 +31,12 @@ export default function Robots() {
 
   slides = slides.map((e, i) => {
     return (
-      <SwiperSlide key={"robot-" + i}>
+      <SwiperSlide key={"robot-" + i} data-bg-image="bg-robot-active" className=''>
         <img className='h-[10rem]' data-bg-image="robot" alt="" />
 
         <h3 className='text-2xl font-semibold'>{e.header}</h3>
 
-        <p className='text-sm w-4/5'>{e.disc}</p>
+        <p className='text-sm w-11/12 my-auto'>{e.disc}</p>
       </SwiperSlide>
     )
   });
@@ -50,7 +51,10 @@ export default function Robots() {
     res.items.forEach(async (e, i) => {
       imgs[i + 4].setAttribute("src", await getDownloadURL(e))
     });
-  })
+  });
+
+  // добавление фона на всех ботов
+  SetBgImage("/png/bg-robot-active.png", 'bg-robot-active', true);
 
   return (
     <Swiper
@@ -58,7 +62,7 @@ export default function Robots() {
       spaceBetween={30}
       loop={true}
       modules={[Autoplay]}
-      className='robots-swiper mt-72 w-2/3'
+      className='robots-swiper mt-56 w-2/3'
       centeredSlides={true}
       autoplay={{
         enabled: true,

@@ -1,15 +1,26 @@
 import { useContext, useEffect } from "react";
 import InputForm from "../components/InputForm";
-import Link from "../components/LinkButton";
 import SubmitButton from "../components/SubmitButton";
 import { Context } from "..";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import LoginFormData from "../constructors/loginFormData";
-import { getDownloadURL, getStorage, ref } from "firebase/storage";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import SetBgImage from "../components/SetBgImage";
 
 export default function Login() {
-  const { auth, app } = useContext(Context);
+  const { auth } = useContext(Context);
+  const navigate = useNavigate();
+  const user = useAuthState(auth);
 
+  // redirect to profile if user is exists 
+  useEffect(() => {
+    if(user[0]) {
+      navigate("/profile");
+    }
+  }, [user, navigate]);
+
+  // handling form
   const hadleSubmit = async (e, auth) => {
     e.preventDefault();
     let form = e.target;
@@ -36,16 +47,7 @@ export default function Login() {
     });
   };
 
-  getDownloadURL(ref(getStorage(app), "/png/bg-for-reg-log.png")).then(url => {
-    const div = document.querySelector("[data-bg-image='bg-login']");
-    div.style.backgroundImage = `url(${url})`
-  })
-
-  useEffect(() => {
-    if(auth.currentUser != null) {
-      window.location.href = "/profile"
-    }
-  }, [auth.currentUser])
+  SetBgImage("/png/bg-for-reg-log.png", 'bg-login');
 
   return (
     <>
@@ -73,9 +75,8 @@ export default function Login() {
           Еще не зарегистрированы?
           <Link
             className="text-sky-400 hover:underline"
-            text="Зарегистрироваться"
-            link="/registration"
-          />
+            to="/registration"
+          >Зарегистрироваться</Link>
         </p>
       </form>
     </>
