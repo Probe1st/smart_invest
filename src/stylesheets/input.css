@@ -113,7 +113,7 @@ body {
 }
 
 .card-profile {
-  @apply grid grid-cols-2 grid-rows-2 gap-1 text-center;
+  @apply grid grid-cols-2 grid-rows-2 gap-1 w-2/3 text-center;
 }
 
 .card-profile> :nth-child(1n) {
