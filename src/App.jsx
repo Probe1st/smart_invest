@@ -6,7 +6,7 @@ import Header from "./components/Header";
 export default function App() {
   return (
     <BrowserRouter>
-      {/* <Header /> */}
+      <Header />
       <AppRouter />
       <div className="mt-32"></div>
     </BrowserRouter>
