@@ -17,7 +17,7 @@ export default function Register() {
   // handling form 
   const handleSubmit = async (e, auth, db) => {
     e.preventDefault();
-    let form = e.target;
+    const form = document.querySelector('form');
 
     let data = new Array(...form.querySelectorAll("input")).map((e) => e.value);
     data = new RegisterFormData(...data, "/robots/Default");
@@ -25,6 +25,9 @@ export default function Register() {
     const { email, pass, repPass } = dataForCreateAccount;
 
     let notice = form.querySelector("#notice");
+    
+    // const formData = new FormData(form);
+    // const [email, password] = formData.getAll("credential");
 
     if (!validatePass(pass, repPass)) {
       notice.removeAttribute("hidden");
@@ -69,14 +72,14 @@ export default function Register() {
 
         <div className="flex flex-col md:flex-row items-center space-y-3 space-x-0 md:space-y-0 md:space-x-5">
           <div className="flex flex-col items-center space-y-3">
-            <InputForm type="text" id="surname" placeholder="Фамилия" />
-            <InputForm type="text" id="name" placeholder="Имя" />
-            <InputForm className="w-full" type="tg" id="tg" placeholder="Телеграм" />
+            <InputForm name="cardUser" type="text" id="surname" placeholder="Фамилия" />
+            <InputForm name="cardUser" type="text" id="name" placeholder="Имя" />
+            <InputForm name="cardUser" className="w-full" type="tg" id="tg" placeholder="Телеграм" />
           </div>
 
           <div className="flex flex-col items-center space-y-3">
-            <InputForm type="email" id="email" placeholder="Почта" />
-            <InputForm type="password" id="password" placeholder="Пароль" />
+            <InputForm name="credential" type="email" id="email" placeholder="Почта" />
+            <InputForm name="credential" type="password" id="password" placeholder="Пароль" />
             <InputForm
               type="Password"
               id="RepeatPassword"
