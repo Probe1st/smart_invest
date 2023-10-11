@@ -40,12 +40,13 @@ export default function Partners() {
   SetBgImage("/png/bg-partners.png", "bg-partners");
   
   return (
-    <div className="space-y-16 mt-16 w-full">
-      <h2 className="mt-10 text-4xl font-bold text-black text-center">
+    <div className="space-y-10 mt-16 w-full">
+      <h2 className="mt-10 text-4xl font-bold text-blue-900 text-center">
         Наши партнеры
       </h2>
+
       <div
-        className="flex flex-row justify-center space-x-4 w-full py-20 bg-cover bg-center bg-no-repeat bg-blue-800"
+        className="flex flex-row justify-center rounded-2xl space-x-4 w-full py-20 bg-cover bg-center bg-no-repeat bg-blue-800"
         data-partners-logo
         data-bg-image='bg-partners'
       >

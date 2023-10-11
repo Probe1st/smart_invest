@@ -43,6 +43,7 @@ export default function Clients() {
     );
   });
 
+
   return (
     <div className="grid grid-cols-3 gap-x-10 mt-32 w-2/3 text-black">
       {dataForCard}

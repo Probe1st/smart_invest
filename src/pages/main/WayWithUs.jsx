@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import SetBgImage from "../../components/SetBgImage";
 
 export default function WayWithUs() {
   let dataForCard = [
@@ -30,7 +31,7 @@ export default function WayWithUs() {
         key={i}
         className="flex flex-col items-center justify-between w-52 text-center"
       >
-        <div className="flex flex-row items-center justify-center text-3xl text-white bg-blue-800 w-16 h-16 rounded-full">
+        <div data-bg-image="way" className="flex flex-row items-center justify-center text-3xl text-white bg-no-repeat bg-cover bg-blue-800 w-16 h-16 rounded-full">
           {i + 1}
         </div>
         <div className="mb-auto mt-3">
@@ -41,11 +42,14 @@ export default function WayWithUs() {
     );
   });
 
+  SetBgImage("/png/Ellipse_Way.png", "way", true);
+
   return (
     <div
-      className="
-      flex flex-col justify-between items-start w-full h-fit bg-contain bg-no-repeat "
+      className="flex flex-col mt-20 items-center justify-between w-full h-fit bg-contain bg-no-repeat"
     >
+      <h2 className="mb-[-7rem] text-4xl font-bold text-blue-900 text-center">5 ШАГОВ НА ПУТИ К ПОДКЛЮЧЕНИЮ</h2>
+
       <div className="bg-[url(https://firebasestorage.googleapis.com/v0/b/smart-invest-14838.appspot.com/o/png%2Fway.png?alt=media&token=690f8614-b736-4dd1-bd8e-4a739718bf4d)]
         flex flex-row items-center w-full h-[700px] bg-auto bg-top bg-no-repeat">
         <div className="way">{dataForCard}</div>
@@ -54,7 +58,7 @@ export default function WayWithUs() {
       <Link
         to={"/registration"}
         className={
-          "flex w-fit mt-5 mx-auto font-bold rounded-full bg-gradient-to-t from-[#193a9f] to-[#2952cd] py-3 px-5 min-w-[8.4rem]"
+          "flex w-fit mt-5 mx-auto font-bold rounded-full bg-gradient-to-r from-[#193A9F] to-[#2856E2] py-3 px-5 min-w-[8.4rem]"
         }
       >Подключиться</Link>
     </div>

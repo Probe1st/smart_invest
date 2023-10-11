@@ -9,7 +9,7 @@ export default function PromoCalculator() {
   SetBgImage("/png/bg-promocalculator.png", "bg-promocalculator")
 
   return (
-    <div className="w-full mt-40 bg-blue-950 text-center bg-no-repeat bg-center bg-cover bg-blend-soft-light" data-bg-image="bg-promocalculator">
+    <div className="w-full mt-40 bg-blue-950 text-center bg-no-repeat bg-center bg-cover bg-blend-soft-light rounded-2xl" data-bg-image="bg-promocalculator">
       <div className="flex flex-row justify-between text-lg w-2/3 mx-auto">
         <div className="flex flex-col justify-between">
           <div></div>

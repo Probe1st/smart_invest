@@ -10,7 +10,7 @@ export default function HowDoItWorks() {
   SetBgImage("/png/bg-howdoitworks.png", "bg-howdoitworks")
 
   return (
-    <div className="w-full mt-44 bg-blue-800 bg-no-repeat bg-cover bg-center bg-blend-overlay" data-bg-image="bg-howdoitworks">
+    <div className="w-full mt-20 bg-blue-800 bg-no-repeat bg-cover bg-center bg-blend-overlay rounded-2xl" data-bg-image="bg-howdoitworks">
       <div className="flex flex-row space-x-8 mx-auto py-7 w-2/3">
         <img alt="" data-src-image="howdoitwork-graphic" />
         <div className="space-y-5">

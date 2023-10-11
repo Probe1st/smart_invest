@@ -2,7 +2,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css/pagination";
 import { getDownloadURL, getStorage, listAll, ref } from "firebase/storage";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Context } from "../..";
 
 export default function FirstSwiper() {
@@ -38,17 +38,19 @@ export default function FirstSwiper() {
     );
   });  
 
-  listAll(ref(getStorage(app), "/firstSliderMain/"))
-    .then((res) => {
-      const elems = document.querySelectorAll(`[data-bg-image='swiper']`);
+  useEffect(() => {
+    listAll(ref(getStorage(app), "/firstSliderMain/"))
+      .then((res) => {
+        const elems = document.querySelectorAll(`[data-bg-image='swiper']`);
 
-      res.items.forEach((e, i) => {
-        getDownloadURL(ref(getStorage(app), `/${e.fullPath}`)).then((url) => {
-          elems[i].style.backgroundImage = `url(${url})`
+        res.items.forEach((e, i) => {
+          getDownloadURL(ref(getStorage(app), `/${e.fullPath}`)).then((url) => {
+            elems[i].style.backgroundImage = `url(${url})`
+          });
         });
-      });
-    })
-    .catch((e) => console.log(e));
+      })
+      .catch((e) => console.log(e));
+  }, [app]);
 
   return (
     <Swiper

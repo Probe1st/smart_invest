@@ -25,7 +25,7 @@ export default function Calculator() {
 
           <input
             onClick={(e) => calculate(e, app)}
-            className="button py-4 bg-slate-400"
+            className="button py-4 bg-[#16338E59]"
             value={"Рассчитать"}
             type="submit"
           />
