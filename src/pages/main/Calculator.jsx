@@ -2,36 +2,38 @@ import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import { useContext } from "react";
 import { Context } from "../..";
 import SetSrcImage from "../../components/SetSrcImage";
+import SetBgImage from "../../components/SetBgImage";
 
 export default function Calculator() {
   const { app } = useContext(Context);
 
-  SetSrcImage("/png/calculator-img.png", "calculator");
+  SetSrcImage("/png/robot-for-calc.png", "calculator");
 
+  SetBgImage("/png/bg-for-calc.png", "calculator");
 
   return (
-    <form onSubmit={(e) => handleSubmit(e)} className="calculator">
+    <form onSubmit={(e) => handleSubmit(e)} data-bg-image="calculator" className="calculator">
       {/* ввод начального взноса и расчет */}
       <div className="grid grid-cols-3 gap-x-14">
         <div
           data-menu-calculator
           className="grid grid-rows-3 gap-y-7 items-center"
         >
-          <p className="text-black  font-semibold">
+          <p className=" font-bold">
             Узнать свой потенциал дохода
           </p>
 
-          <input required type="text" placeholder="100" className="button bg-inherit" />
+          <input required type="text" placeholder="100" className="button" />
 
           <input
             onClick={(e) => calculate(e, app)}
-            className="button py-4 bg-[#16338E59]"
+            className="button py-4 !font-semibold !text-white !bg-[#A3B7F6]"
             value={"Рассчитать"}
             type="submit"
           />
         </div>
 
-        <div data-video="graphic" className="flex flex-row h-full border-2 border-blue-900 rounded-3xl bg-no-repeat bg-cover bg-right" alt=""></div>
+        <div data-video="graphic" className="flex flex-row h-full border-2 border-white rounded-3xl bg-no-repeat bg-cover bg-right" alt=""></div>
 
         <div>
           <img alt="" data-src-image="calculator" />
@@ -107,10 +109,10 @@ function calculate(e, app) {
 
   function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
-  }  
+  }
 
   let randNumb = () => getRandomArbitrary(1, 3).toFixed(0);
-  
+
   getDownloadURL(ref(getStorage(app), `/graphics/graphic-${randNumb()}-${randNumb()}.gif`)).then(
     (url) => {
       const video = document.querySelector("[data-video='graphic']");

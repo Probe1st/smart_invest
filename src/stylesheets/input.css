@@ -21,7 +21,7 @@ body {
 }
 
 .firstSwiper {
-  @apply w-full m-0 h-[25rem] rounded-2xl;
+  @apply w-2/3 m-0 mt-16 h-[30rem] rounded-2xl;
 }
 
 .swiper-pagination :nth-child(n) {
@@ -76,11 +76,11 @@ body {
 /* ------------------------------------------------------------------------- */
 
 .calculator {
-  @apply w-2/3 mt-32 border-2 border-blue-900 rounded-3xl py-11 px-14 space-y-10
+  @apply w-2/3 mt-32 border-4 border-blue-800 rounded-3xl py-11 px-14 space-y-10 bg-no-repeat bg-cover bg-center bg-blue-900
 }
 
 .calculator .button {
-  @apply border-2 rounded-full text-black text-center font-semibold py-4 w-full h-fit cursor-pointer;
+  @apply rounded-full bg-white text-blue-900 text-xl font-bold text-center py-4 w-full h-fit cursor-pointer outline-none;
 }
 
 .calculator .button:not([data-active-plane]) {
@@ -88,7 +88,7 @@ body {
 }
 
 [data-active-plane] {
-  border: solid 2px rgb(37 99 235);
+  background-color: #A3B7F6 !important;
 }
 
 /* ------------------------------------------------------------------------- */

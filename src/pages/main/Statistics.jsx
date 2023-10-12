@@ -2,6 +2,7 @@ import SetSrcImage from "../../components/SetSrcImage";
 import SetBgImage from "../../components/SetBgImage";
 
 export default function Statistics() {
+  //#region set src image
   SetSrcImage("/png/robot-eva.png", 'robot-eva');
 
   SetBgImage("/png/bg-for-statistic.png", 'bg-for-statistic');
@@ -11,7 +12,9 @@ export default function Statistics() {
   SetBgImage("/png/Rectangle_100.png", "Rectangle_100.png");
   SetBgImage("/png/Rectangle_3101.png", "Rectangle_3101.png");
   SetBgImage("/png/Rectangle_1001.png", "Rectangle_1001.png");
-  SetBgImage("/png/Rectangle_102.png", "Rectangle_102.png")
+  SetBgImage("/png/Rectangle_102.png", "Rectangle_102.png");
+  //#endregion
+
   return (
     // container with background
     <div className="w-full mt-44 pt-16 pb-6 bg-blue-800 bg-cover bg-center rounded-2xl" data-bg-image="bg-for-statistic">
@@ -55,5 +58,6 @@ export default function Statistics() {
         </div>
       </div>
     </div>
+    
   );
 }

@@ -15,9 +15,10 @@ import Quations from "./Quations";
 import ReferalNotice from '../../components/ReferalNotice';
 import SetSrcImage from '../../components/SetSrcImage';
 import SetBgImage from '../../components/SetBgImage';
-
+import Discription from './Discription';
 
 export default function Main() {
+  //#region set images
   SetSrcImage("/bgPictures/golden-coin.png", "golden-coin", true); // вставка трех монеток
 
   SetSrcImage("bgPictures/bank-ethereum.png", "bank-ethereum");
@@ -33,6 +34,7 @@ export default function Main() {
   SetSrcImage("bgPictures/wallet.png", "wallet");
 
   SetBgImage("/png/bg-for-principles.png", 'bg-principles', true);
+  //#endregion
 
   return (
     <div className="flex flex-col justify-center items-center w-full mt-8">
@@ -51,6 +53,8 @@ export default function Main() {
       <img className='absolute -z-50 top-[338rem] left-[20rem] w-[15rem]' data-src-image="padlock" alt="" />
       <img className='absolute -z-50 top-[440rem] left-[20rem] w-[20rem]' data-src-image="bitcoins" alt="" />
       <img className='absolute -z-50 top-[450rem] right-[10rem] w-[25rem]' data-src-image="wallet" alt="" />
+
+      <Discription />
 
       <FirstSwiper />
       {/* + */}

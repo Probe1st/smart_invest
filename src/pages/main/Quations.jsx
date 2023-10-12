@@ -1,4 +1,5 @@
 import { useState } from "react";
+import SetBgImage from "../../components/SetBgImage";
 
 
 let questions = [
@@ -25,6 +26,7 @@ let questions = [
 ]
 
 export default function Quations() {
+  SetBgImage("/png/map.png", "map");
 
   return (
     <div className="text-black w-full mt-20">
@@ -32,10 +34,16 @@ export default function Quations() {
         <h2 className="font-bold text-3xl">Вопрос-ответ</h2>
       </div>
 
-      <div className="mt-10">
-        {questions.map(e => {
-          return <Question text={e} key={e.question} />
-        })}
+      <div className="mt-10 flex flex-row items-center justify-between w-2/3 mx-auto">
+        <div className="w-2/5">
+          {questions.map(e => {
+            return <Question text={e} key={e.question} />
+          })}
+        </div>
+
+        <div data-bg-image="map" className="min-h-[20rem] w-3/5 bg-contain bg-no-repeat bg-center">
+
+        </div>
       </div>
     </div>
   );
@@ -46,7 +54,7 @@ function Question({ text}) {
 
   return (
     <div onClick={() => setShowAnswer(!showAnswer)} key={text.question}>
-      <div className="w-2/3 mx-auto mt-3">
+      <div className="w-full mx-auto mt-3">
         <h3 className="cursor-pointer font-semibold">{text.question}</h3>
         <p hidden={!showAnswer} data-answer className="text-base my-5 w-3/5">{text.answer}</p>
       </div>
