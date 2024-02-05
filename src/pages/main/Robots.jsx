@@ -4,6 +4,8 @@ import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Context } from '../..';
 import SetBgImage from '../../components/SetBgImage';
+import { LINK_TO_MAIN_RESOURCE } from '../../utils/consts';
+import { Link } from 'react-router-dom';
 
 export default function Robots() {
   const { app } = useContext(Context);
@@ -43,7 +45,7 @@ export default function Robots() {
         <p className='text-sm w-11/12 my-auto'>{e.disc}</p>
 
         <div className='flex flex-col items-center justify-end w-full flex-grow'>
-          <p className='bg-white text-blue-600 w-2/3 font-bold text-4xl px-2 py-1 rounded-2xl'>{e.price}</p>
+          <Link to={LINK_TO_MAIN_RESOURCE} className='bg-white text-blue-600 w-2/3 font-bold text-3xl px-3 py-1 rounded-2xl'>Купить</Link>
         </div>
       </SwiperSlide>
     )

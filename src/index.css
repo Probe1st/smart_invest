@@ -733,12 +733,28 @@ video {
   top: 97rem;
 }
 
+.top-\[183rem\] {
+  top: 183rem;
+}
+
 .-z-50 {
   z-index: -50;
 }
 
 .z-50 {
   z-index: 50;
+}
+
+.z-10 {
+  z-index: 10;
+}
+
+.-z-10 {
+  z-index: -10;
+}
+
+.-z-20 {
+  z-index: -20;
 }
 
 .mx-auto {
@@ -1215,11 +1231,6 @@ video {
   border-width: 2px;
 }
 
-.border-black {
-  --tw-border-opacity: 1;
-  border-color: rgb(0 0 0 / var(--tw-border-opacity));
-}
-
 .border-blue-950 {
   --tw-border-opacity: 1;
   border-color: rgb(23 37 84 / var(--tw-border-opacity));
@@ -1263,6 +1274,18 @@ video {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.bg-\[\] {
+  background-color: ;
+}
+
+.bg-\[\`\`\] {
+  background-color: ``;
+}
+
+.bg-\[\`\$\`\] {
+  background-color: `$`;
 }
 
 .bg-\[url\(https\:\/\/firebasestorage\.googleapis\.com\/v0\/b\/smart-invest-14838\.appspot\.com\/o\/png\%2Fway\.png\?alt\=media\&token\=690f8614-b736-4dd1-bd8e-4a739718bf4d\)\] {
@@ -1427,6 +1450,11 @@ video {
 .py-7 {
   padding-top: 1.75rem;
   padding-bottom: 1.75rem;
+}
+
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 .pb-10 {
