@@ -118,7 +118,7 @@ function Replenish() {
           Он предоставит вам индивидуальные реквизиты, и закрепит индивидуального робота.</p>
       </div>
 
-      <Link to={"//example.com"} target="_blank" className={"bg-blue-500 px-20 py-2 w-fit rounded-3xl text-2xl"} >Связаться</Link>
+      <Link to={"https://clicks.su/QJDX83"} target="_blank" className={"bg-blue-500 px-20 py-2 w-fit rounded-3xl text-2xl"} >Связаться</Link>
     </div>
   )
 }

@@ -1,23 +1,27 @@
-import { useContext } from "react";
+// import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { Context } from "..";
-import { useAuthState } from "react-firebase-hooks/auth";
+// import { Context } from "..";
+// import { useAuthState } from "react-firebase-hooks/auth";
+import { LINK_TO_MAIN_RESOURCE } from "../utils/consts";
 
 export default function Header() {
-  const { auth } = useContext(Context);
-  const [ user ] = useAuthState(auth);
+  // const { auth } = useContext(Context);
+  // const [ user ] = useAuthState(auth);
 
   return (
     <header className="flex flex-row items-center w-2/3 py-5 justify-between">
       <Logo />
 
       <div className="flex flex-row space-x-5">
-        {
+        {/* {
           user ? (
             <ProfileLink />
           ) : (
             <SignInOrSignUp />
           )
+        } */}
+        {
+          <ContactUs />
         }
       </div>
     </header>
@@ -43,32 +47,14 @@ function Logo() {
   )
 }
 
-function SignInOrSignUp() {
-  return (
-    <>
-      <Link
-        to={"registration"}
-        className={
-          "flex font-bold rounded-full bg-gradient-to-t from-[#193a9f] to-[#2952cd] py-3 px-5 min-w-[8.4rem]"
-        }
-      >Регистрация</Link>
-      <Link
-        to={"login"}
-        className={
-          "flex font-bold rounded-full border border-black justify-center py-3 px-5 min-w-[8.4rem] text-black"
-        }
-      >Вход</Link>
-    </>
-  )
-}
-
-function ProfileLink() {
+function ContactUs() {
   return (
     <Link 
-      to={"/profile"} 
+      to={LINK_TO_MAIN_RESOURCE}
+      target="_blank"
       className={
         "flex font-bold rounded-full bg-gradient-to-t from-[#193a9f] to-[#2952cd] py-3 px-5 min-w-[8.4rem]"
       } 
-    >профиль</Link>
+    >Связаться с Нами</Link>
   )
 }

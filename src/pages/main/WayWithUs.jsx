@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import SetBgImage from "../../components/SetBgImage";
+import { LINK_TO_MAIN_RESOURCE } from "../../utils/consts";
 
 export default function WayWithUs() {
   let dataForCard = [
@@ -56,7 +57,8 @@ export default function WayWithUs() {
       </div>
 
       <Link
-        to={"/registration"}
+        to={LINK_TO_MAIN_RESOURCE}
+        target="_blank"
         className={
           "flex w-fit mt-5 mx-auto font-bold rounded-full bg-gradient-to-r from-[#193A9F] to-[#2856E2] py-3 px-5 min-w-[8.4rem]"
         }
