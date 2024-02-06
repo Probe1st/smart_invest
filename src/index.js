@@ -1,11 +1,11 @@
 import React, { createContext } from "react";
 import ReactDOM from "react-dom/client";
 import { initializeApp } from 'firebase/app';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
+// import { onAuthStateChanged } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import "./index.css";
 import App from "./App";
-
 
 const app = initializeApp({
   apiKey: "AIzaSyC89insvD2vO7mCpXA9F-IqS8tZqtDUzHA",
@@ -21,13 +21,13 @@ const db = getFirestore(app);
 
 export const Context = createContext({auth, db, app });
 
-onAuthStateChanged(auth, (user) => {
-  if(user) {
-    console.log(user.email)
-  }else {
-    console.log("none user")
-  }
-});
+// onAuthStateChanged(auth, (user) => {
+//   if(user) {
+//     console.log(user.email)
+//   }else {
+//     console.log("none user")
+//   }
+// });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

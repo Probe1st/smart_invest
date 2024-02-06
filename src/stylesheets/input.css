@@ -34,10 +34,10 @@ body {
 
 /* ------------------------------------------------------------------------- */
 .simple-card {
-  @apply flex flex-col justify-center w-9/12 space-y-8 z-10;
+  @apply flex flex-col justify-center w-9/12 space-y-8 z-10 pt-5;
 }
 
-.simple-card h2 {
+.simple-card > h2 {
   @apply text-3xl font-bold;
 }
 
@@ -149,6 +149,14 @@ body {
 
 .characteristics> :nth-child(3n + 3) {
   @apply justify-self-start
+}
+
+.characteristics > .card {
+  @apply simple-card bg-blue-800 rounded-2xl pt-2 pb-10 px-5 text-center
+}
+
+.characteristics > .card > h2 {
+  /* @apply mt-5 */
 }
 
 /* ----------------------------------------------------- */
