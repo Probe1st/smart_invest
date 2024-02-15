@@ -75,16 +75,16 @@ const StatisticsData = {
 
 export default function Statistics() {
   //#region set src image
-  // SetSrcImage("/png/robot-eva.png", 'robot-eva');
+  SetSrcImage("/png/robot-eva.png", 'robot-eva');
 
-  // SetBgImage("/png/bg-for-statistic.png", 'bg-for-statistic');
+  SetBgImage("/png/bg-for-statistic.png", 'bg-for-statistic');
 
-  // SetBgImage("/png/Rectangle_103.png", "Rectangle_103.png");
+  SetBgImage("/png/Rectangle_103.png", "Rectangle_103.png");
 
-  // SetBgImage("/png/Rectangle_100.png", "Rectangle_100.png");
-  // SetBgImage("/png/Rectangle_3101.png", "Rectangle_3101.png");
-  // SetBgImage("/png/Rectangle_1001.png", "Rectangle_1001.png");
-  // SetBgImage("/png/Rectangle_102.png", "Rectangle_102.png");
+  SetBgImage("/png/Rectangle_100.png", "Rectangle_100.png");
+  SetBgImage("/png/Rectangle_3101.png", "Rectangle_3101.png");
+  SetBgImage("/png/Rectangle_1001.png", "Rectangle_1001.png");
+  SetBgImage("/png/Rectangle_102.png", "Rectangle_102.png");
   //#endregion
 
   return (
